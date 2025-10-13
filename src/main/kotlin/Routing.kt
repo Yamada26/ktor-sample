@@ -6,7 +6,6 @@ import com.example.presentation.controller.UserController
 import com.example.presentation.form.GetHelloResponse
 import com.example.presentation.form.PostHelloRequest
 import com.example.presentation.form.PostHelloResponse
-import com.example.usecase.ItemUsecase
 import com.example.usecase.UserUsecase
 import io.ktor.server.request.*
 import io.ktor.server.response.*
