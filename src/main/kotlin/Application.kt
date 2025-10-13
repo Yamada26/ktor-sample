@@ -1,5 +1,6 @@
 package com.example
 
+import com.example.infrastructure.exposed.ExposedDatabaseFactory
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.SerializationFeature
 import io.ktor.server.application.*
@@ -12,6 +13,8 @@ fun main(args: Array<String>) {
 }
 
 fun Application.module() {
+    ExposedDatabaseFactory.init()
+
     install(ContentNegotiation) {
         jackson {
             enable(SerializationFeature.INDENT_OUTPUT)
