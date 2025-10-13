@@ -1,10 +1,13 @@
 package com.example
 
+import com.example.domain.repository.IUserRepository
+import com.example.infrastructure.exposed.repository.ExposedUserRepository
 import com.example.presentation.controller.UserController
 import com.example.presentation.form.GetHelloResponse
 import com.example.presentation.form.PostHelloRequest
 import com.example.presentation.form.PostHelloResponse
 import com.example.usecase.ItemUsecase
+import com.example.usecase.UserUsecase
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
@@ -41,8 +44,9 @@ fun Routing.itemsRoute() {
 fun Routing.usersRoute() {
     route("/users") {
         get {
-            // リポジトリの動作確認
-            val userController = UserController()
+            val userRepository: IUserRepository = ExposedUserRepository()
+            val userUsecase = UserUsecase(userRepository)
+            val userController = UserController(userUsecase)
             val users = userController.getUsers()
             call.respond(users)
         }
