@@ -1,44 +1,21 @@
 package com.example
 
-import com.example.presentation.controller.HelloController
+import com.example.domain.repository.IItemRepository
+import com.example.infrastructure.database.repository.ItemRepository
+import com.example.presentation.controller.ItemController
 import com.example.presentation.form.GetHelloResponse
 import com.example.presentation.form.PostHelloRequest
 import com.example.presentation.form.PostHelloResponse
-import io.ktor.server.application.*
+import com.example.usecase.ItemUsecase
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-
-fun Application.configureRouting() {
-    routing {
-        get("/") {
-            call.respondText("Hello World!")
-        }
-
-        get("/test") {
-            call.respondText("This is a test")
-        }
-    }
-}
-
-fun Routing.greetingRoute() {
-    route("/greeting") {
-        get("/hello") {
-            call.respondText("Hello Ktor!")
-        }
-
-        get("/goodmorning") {
-            call.respondText("Good Morning!")
-        }
-    }
-}
 
 fun Routing.helloRoute() {
     route("/hello") {
         get {
 //            val helloController = HelloController()
 //            val response = helloController.getHello()
-
             call.respond(GetHelloResponse("Hello World!"))
         }
 
@@ -50,3 +27,15 @@ fun Routing.helloRoute() {
     }
 }
 
+fun Routing.itemsRoute() {
+    route("/items") {
+        get {
+            val itemRepository: IItemRepository = ItemRepository()
+            val itemUsecase = ItemUsecase(itemRepository)
+            val itemController = ItemController(itemUsecase)
+
+            val result = itemController.getItems()
+            call.respond(result)
+        }
+    }
+}

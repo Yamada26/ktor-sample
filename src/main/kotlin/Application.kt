@@ -19,10 +19,8 @@ fun Application.module() {
         }
     }
 
-
-    configureRouting()
     routing {
-        greetingRoute()
         helloRoute()
+        itemsRoute()
     }
 }
