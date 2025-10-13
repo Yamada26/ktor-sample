@@ -17,16 +17,16 @@ object ExposedDatabaseFactory {
             password = "mypassword"
         )
 
-        transaction {
-            val user = UserEntity.new {
-                name = "test"
-            }
-            println("Inserted id: ${user.id}")
-
-            UserEntity.findById(user.id)?.let {
-                println("id: ${it.id}")
-                println("name: ${it.id}")
-            }
-        }
+//        transaction {
+//            val user = UserEntity.new {
+//                name = "test"
+//            }
+//            println("Inserted id: ${user.id}")
+//
+//            UserEntity.findById(user.id)?.let {
+//                println("id: ${it.id}")
+//                println("name: ${it.id}")
+//            }
+//        }
     }
 }

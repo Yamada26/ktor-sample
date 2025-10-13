@@ -25,5 +25,6 @@ fun Application.module() {
     routing {
         helloRoute()
         itemsRoute()
+        usersRoute()
     }
 }

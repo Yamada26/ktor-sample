@@ -1,8 +1,6 @@
 package com.example
 
-import com.example.domain.repository.IItemRepository
-import com.example.infrastructure.database.repository.ItemRepository
-import com.example.presentation.controller.ItemController
+import com.example.presentation.controller.UserController
 import com.example.presentation.form.GetHelloResponse
 import com.example.presentation.form.PostHelloRequest
 import com.example.presentation.form.PostHelloResponse
@@ -28,14 +26,25 @@ fun Routing.helloRoute() {
 }
 
 fun Routing.itemsRoute() {
-    route("/items") {
-        get {
-            val itemRepository: IItemRepository = ItemRepository()
-            val itemUsecase = ItemUsecase(itemRepository)
-            val itemController = ItemController(itemUsecase)
+//    route("/items") {
+//        get {
+//            val itemRepository: IItemRepository = ItemRepository()
+//            val itemUsecase = ItemUsecase(itemRepository)
+//            val itemController = ItemController(itemUsecase)
+//
+//            val result = itemController.getItems()
+//            call.respond(result)
+//        }
+//    }
+}
 
-            val result = itemController.getItems()
-            call.respond(result)
+fun Routing.usersRoute() {
+    route("/users") {
+        get {
+            // リポジトリの動作確認
+            val userController = UserController()
+            val users = userController.getUsers()
+            call.respond(users)
         }
     }
 }
