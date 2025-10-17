@@ -1,10 +1,14 @@
 package com.example.domain.model
 
+import com.example.shared.error.AppException
+
 data class Item(
     val id: Int,
     val name: String
 ) {
     init {
-        require(name.isNotEmpty()) { "Item name must not be empty" }
+        if (name.isEmpty()) {
+            throw AppException.Invalid("Item name must not be empty")
+        }
     }
 }

@@ -2,6 +2,7 @@ package domain.model
 
 import com.example.domain.model.Item
 import com.example.domain.model.User
+import com.example.shared.error.AppException
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
@@ -19,7 +20,7 @@ class UserTest : StringSpec() {
         }
 
         "Throw an error if name is empty" {
-            val exception = shouldThrow<IllegalArgumentException> {
+            val exception = shouldThrow<AppException.Invalid> {
                 User(1, "")
             }
             exception.message shouldBe "User name must not be empty"
