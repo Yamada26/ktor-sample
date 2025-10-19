@@ -10,39 +10,40 @@ application {
     mainClass = "io.ktor.server.netty.EngineMain"
 }
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
+    // ---- Ktor ----
     implementation(libs.ktor.server.core)
     implementation(libs.ktor.server.netty)
-    implementation(libs.logback.classic)
-    implementation(libs.ktor.server.core)
     implementation(libs.ktor.server.config.yaml)
     implementation(libs.ktor.server.content.negotiation)
     implementation(libs.ktor.serialization.jackson)
 
-    // ✅ Exposed
+    // ---- Logging ----
+    implementation("io.github.oshai:kotlin-logging-jvm:6.0.9")
+    implementation(libs.logback.classic)
+    implementation(libs.ktor.server.call.logging)
+
+    // ---- Database (Exposed + JDBC) ----
     implementation("org.jetbrains.exposed:exposed-core:0.61.0")
     implementation("org.jetbrains.exposed:exposed-dao:0.61.0")
     implementation("org.jetbrains.exposed:exposed-jdbc:0.61.0")
-
-    // ✅ JDBC Driver（例: PostgreSQL）
     implementation("org.postgresql:postgresql:42.7.8")
 
-    // ✅ テスト関連
-    testImplementation(libs.ktor.server.test.host)
+    // ---- Testing ----
     testImplementation(libs.kotlin.test.junit)
+    testImplementation(libs.ktor.server.test.host)
 
-    // ✅ Kotest core
+    // ✅ Kotest
     testImplementation("io.kotest:kotest-runner-junit5:5.9.1")
     testImplementation("io.kotest:kotest-assertions-core:5.9.1")
     testImplementation("io.kotest:kotest-property:5.9.1")
 
-    // ---- Ktor test engine ----
-    testImplementation("io.ktor:ktor-server-test-host-jvm:3.0.0")
+    // ✅ Mock
     testImplementation("io.mockk:mockk:1.14.6")
-}
-
-repositories {
-    mavenCentral()
 }
 
 tasks.test {
