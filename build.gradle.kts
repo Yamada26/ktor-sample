@@ -26,6 +26,7 @@ dependencies {
     implementation("io.github.oshai:kotlin-logging-jvm:6.0.9")
     implementation(libs.logback.classic)
     implementation(libs.ktor.server.call.logging)
+    implementation(libs.ktor.server.call.id)
 
     // ---- Database (Exposed + JDBC) ----
     implementation("org.jetbrains.exposed:exposed-core:0.61.0")

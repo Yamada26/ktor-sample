@@ -1,11 +1,28 @@
 <configuration>
+
+    <!-- ====== 出力フォーマット設定 ====== -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} %-5level [%thread] %logger{36} - %msg%n</pattern>
+            <!--
+                %d{HH:mm:ss.SSS}     : タイムスタンプ
+                [%X{callId}]         : Ktor CallIdプラグインのMDC値（X-Request-IDなど）
+                %-5level             : ログレベル
+                [%thread]            : スレッド名
+                %logger{36}          : ロガー名（クラス名）
+                %msg%n               : メッセージ
+            -->
+            <pattern>%d{HH:mm:ss.SSS} [%X{callId}] %-5level [%thread] %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
 
+    <!-- ====== レベル別ロギング設定 ====== -->
+    <logger name="io.ktor" level="INFO"/>
+    <logger name="org.jetbrains.exposed" level="INFO"/>
+    <logger name="com.example" level="DEBUG"/> <!-- あなたのアプリのパッケージ -->
+
+    <!-- ====== ルートロガー ====== -->
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
     </root>
+
 </configuration>

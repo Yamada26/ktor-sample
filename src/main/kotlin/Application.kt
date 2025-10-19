@@ -12,6 +12,7 @@ import io.ktor.server.response.respond
 import io.ktor.server.routing.get
 import io.github.oshai.kotlinlogging.KotlinLogging
 import io.ktor.server.plugins.calllogging.*
+import io.ktor.server.plugins.callid.*
 
 private val logger = KotlinLogging.logger {}
 
@@ -20,9 +21,17 @@ fun main(args: Array<String>) {
 }
 
 fun Application.module() {
+    install(CallId) {
+        header("X-Request-ID")
+        generate { java.util.UUID.randomUUID().toString() }
+        verify { it.isNotEmpty() }
+    }
+
     install(CallLogging) {
         level = Level.INFO
+        callIdMdc("callId") // ← これを追加！
     }
+
 
     ExposedDatabaseFactory.init()
 
