@@ -5,10 +5,12 @@ import com.example.shared.logging.logger
 
 data class UserDTO(
     val id: Int,
-    val name: String
+    val name: String,
 )
 
-class UserUsecase(private val userRepository: IUserRepository) {
+class UserUsecase(
+    private val userRepository: IUserRepository,
+) {
     private val logger = logger<UserUsecase>()
 
     fun getAllUsers(): List<UserDTO> {
@@ -16,6 +18,6 @@ class UserUsecase(private val userRepository: IUserRepository) {
 
         logger.debug { "users: $users" }
 
-        return users.map { UserDTO(it.id, it.name) }
+        return users.map { UserDTO(it.id.value, it.name) }
     }
 }

@@ -1,11 +1,12 @@
 package com.example.domain.model
 
+import com.example.domain.model.ItemId
 import com.example.shared.error.AppException
 import com.example.shared.logging.logger
 
-data class Item(
-    val id: Int,
-    val name: String
+class Item(
+    val id: ItemId,
+    val name: String,
 ) {
     private val logger = logger<Item>()
 

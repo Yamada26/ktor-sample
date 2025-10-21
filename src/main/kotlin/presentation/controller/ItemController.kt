@@ -5,7 +5,9 @@ import com.example.presentation.form.ItemInfo
 import com.example.shared.logging.logger
 import com.example.usecase.ItemUsecase
 
-class ItemController(private val itemUsecase: ItemUsecase) {
+class ItemController(
+    private val itemUsecase: ItemUsecase,
+) {
     private val logger = logger<ItemController>()
 
     fun getItems(): GetItemsResponse {

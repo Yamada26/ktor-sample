@@ -1,26 +1,24 @@
 package domain.model
 
-import com.example.domain.model.User
 import com.example.domain.model.UserId
 import com.example.shared.error.AppException
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 
-class UserTest : StringSpec() {
+class UserIdTest : StringSpec() {
     init {
-        "Create a user" {
-            val user = User(UserId(1), "test")
-            user.id.value shouldBe 1
-            user.name shouldBe "test"
+        "Create a user id" {
+            val userId = UserId(1)
+            userId.value shouldBe 1
         }
 
-        "Throw an error if name is empty" {
+        "Throw an error if value is smaller than 0" {
             val exception =
                 shouldThrow<AppException.Invalid> {
-                    User(UserId(1), "")
+                    UserId(0)
                 }
-            exception.message shouldBe "User name must not be empty"
+            exception.message shouldBe "User id must be positive"
         }
     }
 }

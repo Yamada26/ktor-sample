@@ -1,8 +1,9 @@
 package usecase
 
-import com.example.usecase.ItemUsecase
 import com.example.domain.model.Item
+import com.example.domain.model.ItemId
 import com.example.domain.repository.IItemRepository
+import com.example.usecase.ItemUsecase
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.every
@@ -15,10 +16,11 @@ class ItemUsecaseTest : StringSpec() {
             val mockRepository = mockk<IItemRepository>()
 
             // モックの振る舞いを定義
-            every { mockRepository.findAll() } returns listOf(
-                Item(1, "Apple"),
-                Item(2, "Banana")
-            )
+            every { mockRepository.findAll() } returns
+                listOf(
+                    Item(ItemId(1), "Apple"),
+                    Item(ItemId(2), "Banana"),
+                )
 
             // テスト対象を作成
             val itemUsecase = ItemUsecase(mockRepository)

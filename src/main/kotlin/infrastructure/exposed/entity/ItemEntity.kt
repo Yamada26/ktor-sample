@@ -6,7 +6,9 @@ import org.jetbrains.exposed.dao.IntEntity
 import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
 
-class ItemEntity(id: EntityID<Int>) : IntEntity(id) {
+class ItemEntity(
+    id: EntityID<Int>,
+) : IntEntity(id) {
     companion object : IntEntityClass<ItemEntity>(ItemsTable)
 
     var name by ItemsTable.name

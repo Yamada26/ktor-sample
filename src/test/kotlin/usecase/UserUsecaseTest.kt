@@ -1,6 +1,7 @@
 package usecase
 
 import com.example.domain.model.User
+import com.example.domain.model.UserId
 import com.example.domain.repository.IUserRepository
 import com.example.usecase.UserUsecase
 import io.kotest.core.spec.style.StringSpec
@@ -15,10 +16,11 @@ class UserUsecaseTest : StringSpec() {
             val mockRepository = mockk<IUserRepository>()
 
             // モックの振る舞いを定義
-            every { mockRepository.findAll() } returns listOf(
-                User(1, "Alice"),
-                User(2, "Bob")
-            )
+            every { mockRepository.findAll() } returns
+                listOf(
+                    User(UserId(1), "Alice"),
+                    User(UserId(2), "Bob"),
+                )
 
             // テスト対象を作成
             val userUsecase = UserUsecase(mockRepository)

@@ -9,7 +9,9 @@ import com.example.shared.logging.logger
 import com.example.usecase.ItemUsecase
 import com.example.usecase.UserUsecase
 
-class UserController(private val userUsecase: UserUsecase) {
+class UserController(
+    private val userUsecase: UserUsecase,
+) {
     private val logger = logger<UserController>()
 
     fun getUsers(): GetUsersResponse {
