@@ -14,11 +14,9 @@ class ExposedUserRepository : IUserRepository {
     override fun findAll(): List<User> {
         // TODO: トランザクションは usecase で
         val users =
-            transaction {
-                UsersTable.selectAll().map {
-                    println("user: $it")
-                    User(UserId(it[UsersTable.id].value), it[UsersTable.name])
-                }
+            UsersTable.selectAll().map {
+                println("user: $it")
+                User(UserId(it[UsersTable.id].value), it[UsersTable.name])
             }
 
         logger.debug { "Items found: $users" }

@@ -2,6 +2,7 @@ package com.example.usecase
 
 import com.example.domain.repository.IUserRepository
 import com.example.shared.logging.logger
+import com.example.usecase.shared.ITransactionManager
 
 data class UserDTO(
     val id: Int,
@@ -10,11 +11,12 @@ data class UserDTO(
 
 class UserUsecase(
     private val userRepository: IUserRepository,
+    private val txManager: ITransactionManager,
 ) {
     private val logger = logger<UserUsecase>()
 
     fun getAllUsers(): List<UserDTO> {
-        val users = userRepository.findAll()
+        val users = txManager.runInTransaction { userRepository.findAll() }
 
         logger.debug { "users: $users" }
 
