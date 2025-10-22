@@ -1,4 +1,3 @@
 # ToDo
 
-- linter
 - ミドルウェア

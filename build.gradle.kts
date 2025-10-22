@@ -21,6 +21,7 @@ dependencies {
     implementation(libs.ktor.server.config.yaml)
     implementation(libs.ktor.server.content.negotiation)
     implementation(libs.ktor.serialization.jackson)
+    implementation("io.ktor:ktor-server-status-pages-jvm:3.3.0")
 
     // ---- Logging ----
     implementation("io.github.oshai:kotlin-logging-jvm:6.0.9")
