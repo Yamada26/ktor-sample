@@ -34,6 +34,7 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-dao:0.61.0")
     implementation("org.jetbrains.exposed:exposed-jdbc:0.61.0")
     implementation("org.postgresql:postgresql:42.7.8")
+    implementation("org.xerial:sqlite-jdbc:3.50.3.0")
 
     // ---- Testing ----
     testImplementation(libs.kotlin.test.junit)

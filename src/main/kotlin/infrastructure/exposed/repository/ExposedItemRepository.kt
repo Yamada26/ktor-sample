@@ -5,7 +5,7 @@ import com.example.domain.model.ItemId
 import com.example.domain.repository.IItemRepository
 import com.example.infrastructure.exposed.table.ItemsTable
 import com.example.shared.logging.logger
-import org.jetbrains.exposed.sql.selectAll
+import org.jetbrains.exposed.sql.*
 
 class ExposedItemRepository : IItemRepository {
     private val logger = logger<IItemRepository>()
@@ -20,5 +20,13 @@ class ExposedItemRepository : IItemRepository {
         logger.debug { "Items found: $items" }
 
         return items
+    }
+
+    override fun save(item: Item): Item {
+        val savedItemRecord = ItemsTable.insert { it[name] = item.name }
+
+        logger.debug { "Item saved: $item" }
+
+        return Item(ItemId(savedItemRecord[ItemsTable.id].value), savedItemRecord[ItemsTable.name])
     }
 }

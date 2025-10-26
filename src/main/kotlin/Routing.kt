@@ -7,11 +7,15 @@ import com.example.infrastructure.exposed.repository.ExposedUserRepository
 import com.example.infrastructure.exposed.shared.ExposedTransactionManager
 import com.example.presentation.controller.ItemController
 import com.example.presentation.controller.UserController
+import com.example.presentation.form.CreateItemRequest
 import com.example.usecase.ItemUsecase
 import com.example.usecase.UserUsecase
+import io.ktor.server.application.call
+import io.ktor.server.request.receive
 import io.ktor.server.response.respond
 import io.ktor.server.routing.Routing
 import io.ktor.server.routing.get
+import io.ktor.server.routing.post
 import io.ktor.server.routing.route
 
 fun Routing.itemsRoute() {
@@ -23,6 +27,17 @@ fun Routing.itemsRoute() {
             val itemController = ItemController(itemUsecase)
 
             val result = itemController.getItems()
+            call.respond(result)
+        }
+
+        post {
+            val itemRepository: IItemRepository = ExposedItemRepository()
+            val txManager = ExposedTransactionManager()
+            val itemUsecase = ItemUsecase(itemRepository, txManager)
+            val itemController = ItemController(itemUsecase)
+
+            val request = call.receive<CreateItemRequest>()
+            val result = itemController.createItem(request)
             call.respond(result)
         }
     }

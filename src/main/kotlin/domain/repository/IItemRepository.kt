@@ -4,4 +4,5 @@ import com.example.domain.model.Item
 
 interface IItemRepository {
     fun findAll(): List<Item>
+    fun save(item: Item): Item
 }

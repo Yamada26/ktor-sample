@@ -11,7 +11,7 @@ class ItemTest : StringSpec() {
     init {
         "Create an item" {
             val item = Item(ItemId(1), "test")
-            item.id.value shouldBe 1
+            item.id!!.value shouldBe 1
             item.name shouldBe "test"
         }
 
