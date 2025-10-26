@@ -3,9 +3,9 @@ package usecase
 import com.example.domain.model.Item
 import com.example.domain.model.ItemId
 import com.example.domain.repository.IItemRepository
+import com.example.infrastructure.exposed.shared.ExposedTransactionManager
 import com.example.usecase.ItemUsecase
 import com.example.usecase.shared.ITransactionManager
-import com.example.infrastructure.exposed.shared.ExposedTransactionManager
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.every
@@ -26,12 +26,12 @@ class ItemUsecaseTest : StringSpec() {
 
             // テスト対象を作成
             val mockTxManager = mockk<ITransactionManager>()
-            every { 
-                mockTxManager.runInTransaction<List<Item>>(any()) 
-            } answers { 
+            every {
+                mockTxManager.runInTransaction<List<Item>>(any())
+            } answers {
                 firstArg<() -> List<Item>>().invoke()
             }
-            
+
             val itemUsecase = ItemUsecase(mockRepository, mockTxManager)
             val items = itemUsecase.getAllItems()
 

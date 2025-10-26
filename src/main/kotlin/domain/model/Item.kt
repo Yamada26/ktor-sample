@@ -1,6 +1,5 @@
 package com.example.domain.model
 
-import com.example.domain.model.ItemId
 import com.example.shared.error.AppException
 import com.example.shared.logging.logger
 

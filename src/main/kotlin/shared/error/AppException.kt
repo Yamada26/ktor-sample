@@ -1,29 +1,29 @@
 package com.example.shared.error
 
 sealed class AppException(
-    message: String,
+        message: String,
 ) : Exception(message) {
     class Invalid(
-        message: String,
+            message: String,
     ) : AppException(message)
 
     class Unauthorized(
-        message: String,
+            message: String,
     ) : AppException(message)
 
     class Forbidden(
-        message: String,
+            message: String,
     ) : AppException(message)
 
     class NotFound(
-        message: String,
+            message: String,
     ) : AppException(message)
 
     class Conflict(
-        message: String,
+            message: String,
     ) : AppException(message)
 
     class Internal(
-        message: String,
+            message: String,
     ) : AppException(message)
 }

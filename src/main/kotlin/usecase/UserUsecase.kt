@@ -5,13 +5,13 @@ import com.example.shared.logging.logger
 import com.example.usecase.shared.ITransactionManager
 
 data class UserDTO(
-    val id: Int,
-    val name: String,
+        val id: Int,
+        val name: String,
 )
 
 class UserUsecase(
-    private val userRepository: IUserRepository,
-    private val txManager: ITransactionManager,
+        private val userRepository: IUserRepository,
+        private val txManager: ITransactionManager,
 ) {
     private val logger = logger<UserUsecase>()
 

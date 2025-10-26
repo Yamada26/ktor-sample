@@ -16,10 +16,7 @@ class ItemTest : StringSpec() {
         }
 
         "Throw an error if name is empty" {
-            val exception =
-                shouldThrow<AppException.Invalid> {
-                    Item(ItemId(1), "")
-                }
+            val exception = shouldThrow<AppException.Invalid> { Item(ItemId(1), "") }
             exception.message shouldBe "Item name must not be empty"
         }
     }

@@ -12,10 +12,10 @@ class ExposedItemRepository : IItemRepository {
 
     override fun findAll(): List<Item> {
         val items =
-            ItemsTable.selectAll().map {
-                println("item: $it")
-                Item(ItemId(it[ItemsTable.id].value), it[ItemsTable.name])
-            }
+                ItemsTable.selectAll().map {
+                    println("item: $it")
+                    Item(ItemId(it[ItemsTable.id].value), it[ItemsTable.name])
+                }
 
         logger.debug { "Items found: $items" }
 

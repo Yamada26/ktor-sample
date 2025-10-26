@@ -16,10 +16,7 @@ class UserTest : StringSpec() {
         }
 
         "Throw an error if name is empty" {
-            val exception =
-                shouldThrow<AppException.Invalid> {
-                    User(UserId(1), "")
-                }
+            val exception = shouldThrow<AppException.Invalid> { User(UserId(1), "") }
             exception.message shouldBe "User name must not be empty"
         }
     }

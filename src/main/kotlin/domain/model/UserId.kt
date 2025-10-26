@@ -4,7 +4,7 @@ import com.example.shared.error.AppException
 
 @JvmInline
 value class UserId(
-    val value: Int,
+        val value: Int,
 ) {
     init {
         if (value < 1) {

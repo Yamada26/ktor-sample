@@ -6,7 +6,6 @@ import com.example.domain.repository.IUserRepository
 import com.example.infrastructure.exposed.table.UsersTable
 import com.example.shared.logging.logger
 import org.jetbrains.exposed.sql.selectAll
-import org.jetbrains.exposed.sql.transactions.transaction
 
 class ExposedUserRepository : IUserRepository {
     private val logger = logger<IUserRepository>()
@@ -14,10 +13,10 @@ class ExposedUserRepository : IUserRepository {
     override fun findAll(): List<User> {
         // TODO: トランザクションは usecase で
         val users =
-            UsersTable.selectAll().map {
-                println("user: $it")
-                User(UserId(it[UsersTable.id].value), it[UsersTable.name])
-            }
+                UsersTable.selectAll().map {
+                    println("user: $it")
+                    User(UserId(it[UsersTable.id].value), it[UsersTable.name])
+                }
 
         logger.debug { "Items found: $users" }
 

@@ -4,7 +4,7 @@ import com.example.shared.error.AppException
 
 @JvmInline
 value class ItemId(
-    val value: Int,
+        val value: Int,
 ) {
     init {
         if (value < 1) {

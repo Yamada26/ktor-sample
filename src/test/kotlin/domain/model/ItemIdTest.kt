@@ -14,10 +14,7 @@ class ItemIdTest : StringSpec() {
         }
 
         "Throw an error if value is smaller than 0" {
-            val exception =
-                shouldThrow<AppException.Invalid> {
-                    ItemId(0)
-                }
+            val exception = shouldThrow<AppException.Invalid> { ItemId(0) }
             exception.message shouldBe "Item id must be positive"
         }
     }

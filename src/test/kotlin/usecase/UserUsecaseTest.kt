@@ -18,17 +18,17 @@ class UserUsecaseTest : StringSpec() {
 
             // モックの振る舞いを定義
             every { mockRepository.findAll() } returns
-                    listOf(
-                            User(UserId(1), "Alice"),
-                            User(UserId(2), "Bob"),
-                    )
+                listOf(
+                    User(UserId(1), "Alice"),
+                    User(UserId(2), "Bob"),
+                )
 
             // テスト対象を作成
             val mockTxManager = mockk<ITransactionManager>()
             every { mockTxManager.runInTransaction<List<User>>(any()) } answers
-                    {
-                        firstArg<() -> List<User>>().invoke()
-                    }
+                {
+                    firstArg<() -> List<User>>().invoke()
+                }
 
             val userUsecase = UserUsecase(mockRepository, mockTxManager)
             val users = userUsecase.getAllUsers()

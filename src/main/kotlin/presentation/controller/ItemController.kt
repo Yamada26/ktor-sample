@@ -6,7 +6,7 @@ import com.example.shared.logging.logger
 import com.example.usecase.ItemUsecase
 
 class ItemController(
-    private val itemUsecase: ItemUsecase,
+        private val itemUsecase: ItemUsecase,
 ) {
     private val logger = logger<ItemController>()
 

@@ -61,7 +61,7 @@ fun Application.module() {
                     logger.error(cause) { "Internal error" }
                     call.respond(
                             HttpStatusCode.InternalServerError,
-                            mapOf("error" to cause.message)
+                            mapOf("error" to cause.message),
                     )
                 }
             }
@@ -72,7 +72,7 @@ fun Application.module() {
             logger.error(cause) { "Unhandled exception" }
             call.respond(
                     HttpStatusCode.InternalServerError,
-                    mapOf("error" to "Internal server error")
+                    mapOf("error" to "Internal server error"),
             )
         }
     }
