@@ -1,0 +1,16 @@
+.gradle
+build
+/.gradle
+/.idea
+/.vscode
+/.git
+.gitignore
+
+# Gradle caches
+.gradle
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
