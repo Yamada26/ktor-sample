@@ -96,5 +96,6 @@ fun Application.module() {
 
         itemsRoute()
         usersRoute()
+        tasksRoute()
     }
 }

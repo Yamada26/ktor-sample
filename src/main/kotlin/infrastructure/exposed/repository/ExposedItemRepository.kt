@@ -5,7 +5,8 @@ import com.example.domain.model.ItemId
 import com.example.domain.repository.IItemRepository
 import com.example.infrastructure.exposed.table.ItemsTable
 import com.example.shared.logging.logger
-import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.insert
+import org.jetbrains.exposed.sql.selectAll
 
 class ExposedItemRepository : IItemRepository {
     private val logger = logger<IItemRepository>()

@@ -1,14 +1,21 @@
 package com.example
 
 import com.example.domain.repository.IItemRepository
+import com.example.domain.repository.ITaskRepository
 import com.example.domain.repository.IUserRepository
 import com.example.infrastructure.exposed.repository.ExposedItemRepository
+import com.example.infrastructure.exposed.repository.ExposedTaskRepository
 import com.example.infrastructure.exposed.repository.ExposedUserRepository
 import com.example.infrastructure.exposed.shared.ExposedTransactionManager
 import com.example.presentation.controller.ItemController
+import com.example.presentation.controller.TaskController
 import com.example.presentation.controller.UserController
 import com.example.presentation.form.CreateItemRequest
+import com.example.presentation.form.CreateTaskRequest
+import com.example.presentation.form.GetTaskRequest
+import com.example.shared.error.AppException
 import com.example.usecase.ItemUsecase
+import com.example.usecase.TaskUsecase
 import com.example.usecase.UserUsecase
 import io.ktor.server.application.call
 import io.ktor.server.request.receive
@@ -38,6 +45,34 @@ fun Routing.itemsRoute() {
 
             val request = call.receive<CreateItemRequest>()
             val result = itemController.createItem(request)
+            call.respond(result)
+        }
+    }
+}
+
+fun Routing.tasksRoute() {
+    route("/tasks") {
+        get("/{id}") {
+            val taskRepository: ITaskRepository = ExposedTaskRepository()
+            val txManager = ExposedTransactionManager()
+            val taskUsecase = TaskUsecase(taskRepository, txManager)
+            val taskController = TaskController(taskUsecase)
+
+            val id =
+                    (call.parameters["id"] ?: "").toIntOrNull()
+                            ?: throw AppException.Invalid("Invalid task id")
+            val result = taskController.getTask(GetTaskRequest(id))
+            call.respond(result)
+        }
+
+        post {
+            val taskRepository: ITaskRepository = ExposedTaskRepository()
+            val txManager = ExposedTransactionManager()
+            val taskUsecase = TaskUsecase(taskRepository, txManager)
+            val taskController = TaskController(taskUsecase)
+
+            val request = call.receive<CreateTaskRequest>()
+            val result = taskController.createTask(request)
             call.respond(result)
         }
     }

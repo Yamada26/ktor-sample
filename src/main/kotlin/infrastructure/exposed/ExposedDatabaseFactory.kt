@@ -1,6 +1,7 @@
 package com.example.infrastructure.exposed
 
 import com.example.infrastructure.exposed.table.ItemsTable
+import com.example.infrastructure.exposed.table.TasksTable
 import com.example.infrastructure.exposed.table.UsersTable
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
@@ -13,6 +14,6 @@ object ExposedDatabaseFactory {
         Database.connect(url = "jdbc:sqlite:app.db", driver = "org.sqlite.JDBC")
 
         // Create tables if they don't exist yet.
-        transaction { SchemaUtils.create(UsersTable, ItemsTable) }
+        transaction { SchemaUtils.create(UsersTable, ItemsTable, TasksTable) }
     }
 }
